@@ -1,11 +1,15 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  images: {
-    unoptimized: true,
-  },
-}
+const repo = "NEW-GRECHKO";
 
-export default nextConfig
+// На GitHub Pages сайт живёт не в корне домена, а в /REPO
+const isGithubPages = process.env.GITHUB_PAGES === "true";
+const basePath = isGithubPages ? `/${repo}` : "";
+
+const nextConfig = {
+  output: "export",              // статический экспорт (out/)
+  trailingSlash: true,           // чтобы /NEW-GRECHKO/ работал как папка
+  basePath,
+  assetPrefix: basePath,
+  images: { unoptimized: true }, // next/image не работает на Pages без оптимизатора
+};
+
+export default nextConfig;
