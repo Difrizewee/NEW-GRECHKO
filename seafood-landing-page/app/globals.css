@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 214 50% 8%;
+    --foreground: 200 20% 95%;
+    --card: 214 45% 12%;
+    --card-foreground: 200 20% 95%;
+    --popover: 214 45% 12%;
+    --popover-foreground: 200 20% 95%;
+    --primary: 180 55% 45%;
+    --primary-foreground: 214 50% 8%;
+    --secondary: 214 35% 18%;
+    --secondary-foreground: 200 20% 90%;
+    --muted: 214 30% 15%;
+    --muted-foreground: 200 15% 60%;
+    --accent: 42 45% 55%;
+    --accent-foreground: 214 50% 8%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214 30% 22%;
+    --input: 214 30% 22%;
+    --ring: 180 55% 45%;
+    --chart-1: 180 55% 45%;
+    --chart-2: 42 45% 55%;
+    --chart-3: 214 35% 40%;
+    --chart-4: 200 30% 50%;
+    --chart-5: 190 40% 35%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Ocean background depth gradient keyframes */
+@keyframes caustics {
+  0%, 100% { opacity: 0.3; transform: scale(1) rotate(0deg); }
+  25% { opacity: 0.5; transform: scale(1.05) rotate(1deg); }
+  50% { opacity: 0.35; transform: scale(1.02) rotate(-0.5deg); }
+  75% { opacity: 0.45; transform: scale(0.98) rotate(0.5deg); }
+}
+
+@keyframes float-up {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.4; }
+  90% { opacity: 0.4; }
+  100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+}
+
+@keyframes drift-left {
+  0% { transform: translateX(100vw) translateY(0); opacity: 0; }
+  10% { opacity: 0.12; }
+  90% { opacity: 0.12; }
+  100% { transform: translateX(-100vw) translateY(-30px); opacity: 0; }
+}
+
+@keyframes drift-right {
+  0% { transform: translateX(-100vw) translateY(0); opacity: 0; }
+  10% { opacity: 0.1; }
+  90% { opacity: 0.1; }
+  100% { transform: translateX(100vw) translateY(20px); opacity: 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.15; filter: blur(20px); }
+  50% { opacity: 0.3; filter: blur(25px); }
+}
+
+@keyframes jellyfish-drift {
+  0% { transform: translateY(0) translateX(0) scale(1); }
+  25% { transform: translateY(-15px) translateX(5px) scale(1.02); }
+  50% { transform: translateY(-5px) translateX(-3px) scale(0.98); }
+  75% { transform: translateY(-20px) translateX(8px) scale(1.01); }
+  100% { transform: translateY(0) translateX(0) scale(1); }
+}
+
+@keyframes fish-school {
+  0% { transform: translateX(-200px) translateY(0); opacity: 0; }
+  5% { opacity: 0.15; }
+  95% { opacity: 0.15; }
+  100% { transform: translateX(calc(100vw + 200px)) translateY(-20px); opacity: 0; }
+}
+
+@keyframes whale {
+  0% { transform: translateX(-300px) translateY(0); opacity: 0; }
+  10% { opacity: 0.06; }
+  90% { opacity: 0.06; }
+  100% { transform: translateX(calc(100vw + 300px)) translateY(-15px); opacity: 0; }
+}
+
+/* Glass panel for content sections */
+.glass-panel {
+  background: hsla(214, 45%, 12%, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid hsla(200, 20%, 95%, 0.08);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .glass-panel {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: hsla(214, 45%, 12%, 0.85);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(214, 50%, 8%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(214, 30%, 22%);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(180, 55%, 45%);
+}
