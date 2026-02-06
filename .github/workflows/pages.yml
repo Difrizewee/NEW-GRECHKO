@@ -31,7 +31,7 @@ jobs:
         with:
           version: 9
 
-      - name: Install deps
+      - name: Install
         run: pnpm install --frozen-lockfile
 
       - name: Build (static export)
@@ -39,7 +39,7 @@ jobs:
           GITHUB_PAGES: "true"
         run: pnpm exec next build
 
-      - name: Upload Pages artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: out
