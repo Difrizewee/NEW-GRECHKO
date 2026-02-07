@@ -1,0 +1,346 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 214 50% 8%;
+    --foreground: 200 20% 95%;
+    --card: 214 45% 12%;
+    --card-foreground: 200 20% 95%;
+    --popover: 214 45% 12%;
+    --popover-foreground: 200 20% 95%;
+    --primary: 180 55% 45%;
+    --primary-foreground: 214 50% 8%;
+    --secondary: 214 35% 18%;
+    --secondary-foreground: 200 20% 90%;
+    --muted: 214 30% 15%;
+    --muted-foreground: 200 15% 60%;
+    --accent: 42 45% 55%;
+    --accent-foreground: 214 50% 8%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214 30% 22%;
+    --input: 214 30% 22%;
+    --ring: 180 55% 45%;
+    --chart-1: 180 55% 45%;
+    --chart-2: 42 45% 55%;
+    --chart-3: 214 35% 40%;
+    --chart-4: 200 30% 50%;
+    --chart-5: 190 40% 35%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Ocean background depth gradient keyframes */
+@keyframes caustics {
+  0%, 100% { opacity: 0.3; transform: scale(1) rotate(0deg); }
+  25% { opacity: 0.5; transform: scale(1.05) rotate(1deg); }
+  50% { opacity: 0.35; transform: scale(1.02) rotate(-0.5deg); }
+  75% { opacity: 0.45; transform: scale(0.98) rotate(0.5deg); }
+}
+
+@keyframes float-up {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.4; }
+  90% { opacity: 0.4; }
+  100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+}
+
+@keyframes drift-left {
+  0% { transform: translateX(100vw) translateY(0); opacity: 0; }
+  10% { opacity: 0.12; }
+  90% { opacity: 0.12; }
+  100% { transform: translateX(-100vw) translateY(-30px); opacity: 0; }
+}
+
+@keyframes drift-right {
+  0% { transform: translateX(-100vw) translateY(0); opacity: 0; }
+  10% { opacity: 0.1; }
+  90% { opacity: 0.1; }
+  100% { transform: translateX(100vw) translateY(20px); opacity: 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.15; filter: blur(20px); }
+  50% { opacity: 0.3; filter: blur(25px); }
+}
+
+@keyframes jellyfish-drift {
+  0% { transform: translateY(0) translateX(0) scale(1); }
+  25% { transform: translateY(-15px) translateX(5px) scale(1.02); }
+  50% { transform: translateY(-5px) translateX(-3px) scale(0.98); }
+  75% { transform: translateY(-20px) translateX(8px) scale(1.01); }
+  100% { transform: translateY(0) translateX(0) scale(1); }
+}
+
+@keyframes fish-school {
+  0% { transform: translateX(-200px) translateY(0); opacity: 0; }
+  5% { opacity: 0.15; }
+  95% { opacity: 0.15; }
+  100% { transform: translateX(calc(100vw + 200px)) translateY(-20px); opacity: 0; }
+}
+
+@keyframes whale {
+  0% { transform: translateX(-300px) translateY(0); opacity: 0; }
+  10% { opacity: 0.06; }
+  90% { opacity: 0.06; }
+  100% { transform: translateX(calc(100vw + 300px)) translateY(-15px); opacity: 0; }
+}
+
+/* Glass panel for content sections */
+.glass-panel {
+  background: hsla(214, 45%, 12%, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid hsla(200, 20%, 95%, 0.08);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .glass-panel {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: hsla(214, 45%, 12%, 0.85);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(214, 50%, 8%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(214, 30%, 22%);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(180, 55%, 45%);
+}
+
+/* ===== Ocean Environment (scene-driven) ===== */
+:root {
+  /* SceneManager overrides these values */
+  --ocean-top: hsl(214 60% 14%);
+  --ocean-mid: hsl(214 58% 10%);
+  --ocean-deep: hsl(214 65% 6%);
+  --ocean-caustics: 0.34;
+  --ocean-grain: 0.055;
+  --ocean-particles: 0.10;
+  --ocean-contours: 0.08;
+  --ocean-grid: 0.00;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html[data-dive="1"] {
+  --ocean-caustics: 0.52;
+  --ocean-particles: 0.15;
+}
+
+.ocean-env {
+  color: hsla(180, 55%, 70%, 0.45);
+}
+
+.ocean-gradient {
+  background: linear-gradient(180deg, var(--ocean-top) 0%, var(--ocean-mid) 55%, var(--ocean-deep) 100%);
+  transition: background 900ms ease;
+}
+
+.ocean-caustics {
+  opacity: var(--ocean-caustics);
+  background:
+    radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.20) 0%, transparent 55%),
+    radial-gradient(circle at 70% 40%, rgba(45, 212, 191, 0.16) 0%, transparent 55%),
+    radial-gradient(circle at 40% 75%, rgba(56, 189, 248, 0.12) 0%, transparent 60%),
+    radial-gradient(circle at 85% 80%, rgba(45, 212, 191, 0.10) 0%, transparent 55%);
+  filter: blur(22px);
+  mix-blend-mode: screen;
+  animation: caustics 14s ease-in-out infinite;
+  transition: opacity 700ms ease;
+}
+
+.ocean-grain {
+  opacity: var(--ocean-grain);
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.06) 0.7px, transparent 0.7px),
+    radial-gradient(circle, rgba(255,255,255,0.04) 0.5px, transparent 0.5px);
+  background-size: 28px 28px, 18px 18px;
+  background-position: 0 0, 9px 12px;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  transition: opacity 700ms ease;
+}
+
+/* Contours / isobaths */
+.ocean-contours {
+  opacity: var(--ocean-contours);
+  transition: opacity 700ms ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='600' viewBox='0 0 900 600'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.22)' stroke-width='1'%3E%3Cpath d='M40 120c120-60 260-60 420 0s320 60 420 0'/%3E%3Cpath d='M-10 220c140-70 300-70 480 0s340 70 480 0'/%3E%3Cpath d='M50 330c110-50 230-50 360 0s250 50 360 0'/%3E%3Cpath d='M-30 440c160-60 340-60 520 0s360 60 520 0'/%3E%3C/g%3E%3Cg fill='none' stroke='rgba(255,255,255,0.14)' stroke-width='1'%3E%3Cpath d='M80 160c100-40 210-40 330 0s230 40 330 0'/%3E%3Cpath d='M20 380c150-55 310-55 480 0s330 55 480 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 1100px 700px;
+  background-repeat: repeat;
+}
+
+/* Technical grid for cold-chain */
+.ocean-grid {
+  opacity: var(--ocean-grid);
+  transition: opacity 700ms ease;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.09) 1px, transparent 1px);
+  background-size: 120px 120px;
+  mix-blend-mode: overlay;
+}
+
+/* Light rays: strong only on hero scene */
+.ocean-rays {
+  opacity: 0;
+  transition: opacity 700ms ease;
+}
+html[data-scene="hero"] .ocean-rays {
+  opacity: 1;
+}
+
+.ocean-ray {
+  position: absolute;
+  top: -10%;
+  width: 9%;
+  transform: skewX(-10deg);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.10), transparent);
+  filter: blur(2px);
+  animation: pulse-glow 20s ease-in-out infinite;
+}
+
+/* Particles */
+.ocean-particles {
+  opacity: var(--ocean-particles);
+  transition: opacity 700ms ease;
+}
+
+.ocean-particle {
+  position: absolute;
+  bottom: -24px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.55);
+  filter: blur(0.2px);
+  animation-name: float-up;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Marine silhouettes */
+.ocean-marine {
+  opacity: calc(var(--ocean-particles) * 0.9);
+  transition: opacity 700ms ease;
+}
+html[data-scene="clean"] .ocean-marine {
+  opacity: 0;
+}
+
+.ocean-jelly {
+  position: absolute;
+  left: 12%;
+  top: 22%;
+  filter: blur(0.2px);
+  animation: jellyfish-drift 14s ease-in-out infinite;
+}
+
+.ocean-school {
+  position: absolute;
+  left: -20%;
+  top: 48%;
+  animation: fish-school 26s linear infinite;
+}
+
+.ocean-whale {
+  position: absolute;
+  left: -35%;
+  top: 68%;
+  animation: whale 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ocean-caustics,
+  .ocean-particle,
+  .ocean-jelly,
+  .ocean-school,
+  .ocean-whale,
+  .ocean-ray {
+    animation: none !important;
+  }
+}
+
+/* ===== Micro-interactions ===== */
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 0.55;
+  }
+  to {
+    transform: scale(16);
+    opacity: 0;
+  }
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(0);
+  animation: ripple 750ms ease-out;
+  pointer-events: none;
+}
+
+@keyframes badgePulse {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.badge-pulse {
+  animation: badgePulse 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes waveWipe {
+  0% {
+    transform: translateX(100%);
+    opacity: 0.65;
+  }
+  45% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.wave-wipe {
+  background:
+    radial-gradient(circle at 20% 50%, rgba(56, 189, 248, 0.18) 0%, transparent 60%),
+    radial-gradient(circle at 55% 45%, rgba(45, 212, 191, 0.14) 0%, transparent 55%),
+    radial-gradient(circle at 85% 55%, rgba(56, 189, 248, 0.12) 0%, transparent 60%),
+    linear-gradient(90deg, rgba(12, 26, 46, 0.92), rgba(6, 14, 26, 0.96));
+  filter: blur(8px);
+  mix-blend-mode: screen;
+  animation: waveWipe 900ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
