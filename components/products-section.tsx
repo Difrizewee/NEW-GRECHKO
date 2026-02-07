@@ -33,7 +33,7 @@ const products: Product[] = [
   {
     id: "trout-fillet-500",
     name: "Филе форели охлаждённое",
-    image: "/placeholder.svg",
+    image: "images/product-trout-fillet.jpg",
     imageNote: "Пример подачи",
     origin: "Карелия, аквакультура",
     condition: "Охлаждённое",
@@ -53,7 +53,7 @@ const products: Product[] = [
   {
     id: "king-shrimp-1kg",
     name: "Креветки королевские",
-    image: "/placeholder.svg",
+    image: "images/product-king-shrimp.jpg",
     imageNote: "Пример подачи",
     origin: "Аргентина, дикий вылов",
     condition: "Замороженное",
@@ -73,7 +73,7 @@ const products: Product[] = [
   {
     id: "black-caviar-50",
     name: "Икра чёрная осетровая",
-    image: "/placeholder.svg",
+    image: "images/product-black-caviar.jpg",
     imageNote: "Пример подачи",
     origin: "Вологда, аквакультура (осётр)",
     condition: "Охлаждённое",
@@ -93,7 +93,7 @@ const products: Product[] = [
   {
     id: "sturgeon-steak-400",
     name: "Стейк осетра охлаждённый",
-    image: "/placeholder.svg",
+    image: "images/product-sturgeon-steak.jpg",
     imageNote: "Пример подачи",
     origin: "Вологда, аквакультура",
     condition: "Охлаждённое",
@@ -113,7 +113,7 @@ const products: Product[] = [
   {
     id: "red-caviar-250",
     name: "Икра красная лососёвая",
-    image: "/placeholder.svg",
+    image: "images/product-red-caviar.jpg",
     imageNote: "Пример подачи",
     origin: "Камчатка, дикий вылов (горбуша)",
     condition: "Охлаждённое",
@@ -133,7 +133,7 @@ const products: Product[] = [
   {
     id: "smoked-trout-350",
     name: "Форель холодного копчения",
-    image: "/placeholder.svg",
+    image: "images/product-smoked-trout.jpg",
     imageNote: "Пример подачи",
     origin: "Карелия, аквакультура",
     condition: "Охлаждённое",
